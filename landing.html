@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Landing</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  font-family:'Cinzel', serif;
+  overflow:hidden;
+}
+
+/* HERO */
+.hero {
+  height:100vh;
+  background:url('2.png') no-repeat center/cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+/* OVERLAY */
+.overlay {
+  position:absolute;
+  width:100%;height:100%;
+  background:linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+}
+
+/* CONTENT */
+.content {
+  position:relative;
+  text-align:center;
+  color:white;
+}
+
+/* TEXT */
+.top-text, .name, .desc, .tagline, .btn {
+  opacity:0;
+  transform:translateY(20px);
+}
+
+.name {
+  font-family:'Playfair Display';
+  font-size:65px;
+}
+
+/* BUTTON */
+.btn {
+  margin-top:20px;
+  padding:12px 28px;
+  border:1px solid white;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover {
+  background:rgba(255,255,255,0.2);
+}
+
+/* FOG EFFECT 🔥 */
+.fog {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:url('https://static.vecteezy.com/system/resources/thumbnails/020/918/090/small_2x/fog-motion-blured-isolated-3d-render-png.png') repeat;
+  background-size:cover;
+  opacity:0.9;
+  z-index:999;
+  pointer-events:none;
+
+  animation:fogMove 4s ease forwards;
+}
+
+@keyframes fogMove {
+  from {
+    transform:translateY(0);
+    opacity:1;
+  }
+  to {
+    transform:translateY(-200px);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- KABUT -->
+<div class="fog"></div>
+
+<div class="hero">
+  <div class="overlay"></div>
+
+  <div class="content">
+    <p class="top-text">WELCOME TO THE HEIGHTS</p>
+    <h1 class="name">PHEEN</h1>
+    <p class="desc">A PORTFOLIO OF DIGITAL CRAFTSMANSHIP & DESIGN</p>
+    <p class="tagline">FORGING IDEAS INTO EXPERIENCES</p>
+
+    <!-- ✅ TOMBOL FIX -->
+    <button class="btn" onclick="goHome()">VIEW MY WORK</button>
+  </div>
+</div>
+
+<script>
+// animasi text muncul satu-satu
+const elements = document.querySelectorAll(".top-text, .name, .desc, .tagline, .btn");
+
+elements.forEach((el, i) => {
+  setTimeout(() => {
+    el.style.transition = "all 1s ease";
+    el.style.opacity = 1;
+    el.style.transform = "translateY(0)";
+  }, i * 300);
+});
+
+// fungsi pindah halaman
+function goHome() {
+  window.location.href = "home.html";
+}
+
+// hapus kabut
+setTimeout(() => {
+  document.querySelector(".fog").remove();
+}, 4000);
+</script>
+
+</body>
+</html>

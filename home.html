@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PHEEN Portfolio Dewa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;color:white;background:#0a0a0a;overflow-x:hidden;position:relative;}
+body::before{content:"";position:fixed;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(255,255,255,0.02),rgba(255,255,255,0.02) 1px,transparent 1px,transparent 3px);pointer-events:none;}
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-thumb{background:#ff3c00;border-radius:10px;}
+::-webkit-scrollbar-track{background:#111;}
+
+/* LOADER */
+#loader{position:fixed;width:100%;height:100%;background:#000;display:flex;justify-content:center;align-items:center;z-index:10000;}
+#loader h1{font-family:'Cinzel';color:#ff3c00;letter-spacing:5px;animation:glow 1.5s infinite alternate;}
+@keyframes glow{0%{text-shadow:0 0 5px #ff3c00,0 0 10px #ff3c00;}100%{text-shadow:0 0 20px #ff3c00,0 0 40px #ff3c00;}}
+
+/* CURSOR */
+.cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:#ff3c00;pointer-events:none;mix-blend-mode:screen;box-shadow:0 0 20px #ff3c00,0 0 60px #ff3c00;transform:translate(-50%,-50%);transition:transform 0.1s ease;z-index:9999;}
+
+/* NAVBAR */
+.navbar{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:20px 40px;background: rgba(0,0,0,0.4);backdrop-filter:blur(10px);z-index:999;}
+.navbar h2{font-family:'Cinzel';}
+.navbar ul{display:flex;gap:20px;list-style:none;}
+.navbar a{color:white;text-decoration:none;transition:0.3s;}
+.navbar a:hover{color:#ff3c00;text-shadow:0 0 10px #ff3c00,0 0 20px #ff3c00;}
+
+/* HERO */
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;}
+.profile-img{width:170px;height:170px;border-radius:50%;object-fit:cover;border:3px solid #ff3c00;box-shadow:0 0 25px #ff3c00,0 0 60px rgba(255,60,0,0.3);margin-bottom:20px;transition:0.3s;}
+.profile-img:hover{transform:scale(1.05);}
+.name{font-family:'Cinzel';font-size:40px;}
+.role{color:#aaa;font-size:20px;}
+#typing::after{content:'|';animation:blink 0.7s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* PARTICLE CANVAS */
+#particles{position:absolute;width:100%;height:100%;top:0;left:0;z-index:0;pointer-events:none;}
+
+/* SECTION ANIMASI */
+section{opacity:0;transform:translateY(50px);transition:1s;}
+
+/* ABOUT */
+.about{padding:80px 20px;text-align:center;max-width:700px;margin:auto;}
+
+/* PROJECT */
+.projects{padding:60px 20px;}
+.projects h2{text-align:center;margin-bottom:30px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1000px;margin:auto;}
+.card{background: rgba(255,255,255,0.05);backdrop-filter: blur(10px);border:1px solid rgba(255,60,0,0.5);border-radius:12px;overflow:hidden;transition:0.3s;position:relative;cursor:pointer;perspective:1000px;}
+.card img{width:100%;height:150px;object-fit:cover;}
+.card p{padding:15px;text-align:center;font-weight:500;}
+.card::after{content:"VIEW";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;opacity:0;transition:0.3s;font-weight:bold;}
+.card:hover::after{opacity:1;}
+.card:hover{transform:translateY(-8px) rotateY(5deg);box-shadow:0 0 20px #ff3c00;}
+
+/* MODAL */
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:0.3s;z-index:10000;}
+.modal.active{opacity:1;pointer-events:auto;}
+.modal-content{background:#111;border:2px solid #ff3c00;border-radius:15px;padding:20px;max-width:600px;width:90%;text-align:center;position:relative;}
+.modal-close{position:absolute;top:10px;right:10px;color:#ff3c00;font-size:25px;cursor:pointer;}
+
+/* SKILLS */
+.skills{padding:60px 20px;max-width:700px;margin:auto;}
+.skill{margin-bottom:20px;}
+.bar{background:#222;border-radius:20px;overflow:hidden;height:10px;}
+.bar span{display:block;height:100%;background:#ff3c00;width:0;transition:1s;}
+
+/* CONTACT */
+.contact{text-align:center;padding:60px;}
+.contact a{color:#ff3c00;text-decoration:none;}
+.contact-btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 25px;
+  background:#ff3c00;
+  color:#000;
+  font-weight:bold;
+  border-radius:50px;
+  text-decoration:none;
+  box-shadow:0 0 20px #ff3c00,0 0 40px #ff3c00;
+  transition:0.3s;
+}
+.contact-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 30px #ff3c00,0 0 60px #ff3c00;
+}
+
+/* FOOTER */
+footer{text-align:center;padding:30px;opacity:0.6;}
+</style>
+</head>
+<body>
+
+<div id="loader"><h1>PHEEN</h1></div>
+<div class="cursor"></div>
+<canvas id="particles"></canvas>
+
+<nav class="navbar">
+<h2>PHEEN</h2>
+<ul>
+<li><a href="#hero">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#projects">Work</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section class="hero" id="hero">
+<img src="22.png" class="profile-img">
+<h1 class="name">PHEEN</h1>
+<p class="role"><span id="typing"></span></p>
+</section>
+
+<section class="about" id="about">
+<h2>About Me</h2>
+<p>Saya adalah kreator digital yang fokus pada desain aesthetic, UI/UX, dan pengembangan web dengan gaya cinematic dan modern.</p>
+</section>
+
+<section class="projects" id="projects">
+<h2>My Work</h2>
+<div class="grid">
+<div class="card" data-title="UI Design Project"><img src="https://i.pinimg.com/originals/2d/4b/c6/2d4bc67dda542a220c5588a10daacc4e.gif"><p>UI Design Project</p></div>
+<div class="card" data-title="Website Project"><img src="https://i.pinimg.com/originals/91/0a/de/910ade72ad48eb863c3130d55a0a67cc.gif"><p>Website Project</p></div>
+<div class="card" data-title="Editing Project"><img src="https://i.pinimg.com/originals/7b/e2/a8/7be2a89d6c2adf9faa77890b3e2c86b4.gif"><p>Editing Project</p></div>
+</div>
+</section>
+
+<section class="skills" id="skills">
+<h2>Skills</h2>
+<div class="skill"><p>UI Design</p><div class="bar"><span></span></div></div>
+<div class="skill"><p>Web Dev</p><div class="bar"><span></span></div></div>
+<div class="skill"><p>Editing</p><div class="bar"><span></span></div></div>
+</section>
+
+<section class="contact" id="contact">
+<h2>Contact</h2>
+<p>Instagram: <a href="#">@i8ouleyy</a></p>
+<a href="mailto:youremail@example.com" class="contact-btn">Hire Me</a>
+</section>
+
+<footer>© 2026 Pheen Portfolio</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal"><div class="modal-content"><span class="modal-close">&times;</span><h2 id="modal-title"></h2><p>Detail project cinematic, gambar/video bisa ditambahkan di sini</p></div></div>
+
+<script>
+// LOADER
+window.addEventListener("load", ()=>{document.getElementById("loader").style.display="none";});
+
+// SCROLL ANIMASI
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll", ()=>{
+sections.forEach(sec=>{
+let top=window.scrollY;
+let offset=sec.offsetTop-300;
+if(top>offset){sec.style.opacity=1;sec.style.transform="translateY(0)";}
+});
+});
+
+// CURSOR
+const cursor=document.querySelector(".cursor");
+document.addEventListener("mousemove", e=>{cursor.style.top=e.clientY+"px";cursor.style.left=e.clientX+"px";});
+
+// TYPING ROLE
+const roles=["Designer","Developer","Editor"];
+let i=0,j=0,deleting=false;
+function typeRole(){
+const el=document.getElementById("typing");const text=roles[i];
+if(!deleting){el.textContent=text.substring(0,j++);}
+else{el.textContent=text.substring(0,j--);}
+if(j===text.length+1){deleting=true;setTimeout(typeRole,1000);return;}
+if(j===0){deleting=false;i=(i+1)%roles.length;}
+setTimeout(typeRole,deleting?50:100);
+}
+typeRole();
+
+// SKILL BAR ANIMASI
+const skillBars=document.querySelectorAll(".bar span");
+window.addEventListener("scroll", ()=>{
+skillBars.forEach(bar=>{
+const rect=bar.getBoundingClientRect();
+if(rect.top<window.innerHeight-50){
+const width=bar.parentElement.previousElementSibling.textContent.includes("UI Design")?"90%":
+bar.parentElement.previousElementSibling.textContent.includes("Web Dev")?"85%":"80%";
+bar.style.width=width;
+}
+});
+});
+
+// PARALLAX HERO
+window.addEventListener("scroll",()=>{
+const hero=document.querySelector(".hero");
+hero.style.transform=`translateY(${window.scrollY*0.3}px)`;
+});
+
+// PARTICLES
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+let particles=[];
+for(let p=0;p<100;p++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*1.5,dy:(Math.random()-0.5)*1.5});}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(pa=>{ctx.beginPath();ctx.arc(pa.x,pa.y,pa.r,0,Math.PI*2);ctx.fillStyle="rgba(255,60,0,0.7)";ctx.fill();pa.x+=pa.dx;pa.y+=pa.dy;if(pa.x<0||pa.x>canvas.width)pa.dx*=-1;if(pa.y<0||pa.y>canvas.height)pa.dy*=-1;});requestAnimationFrame(animate);}
+animate();
+window.addEventListener("resize",()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+// MODAL PROJECT
+const modal=document.getElementById("modal");
+const modalTitle=document.getElementById("modal-title");
+const cards=document.querySelectorAll(".card");
+const modalClose=document.querySelector(".modal-close");
+cards.forEach(card=>{
+card.addEventListener("click",()=>{modal.classList.add("active");modalTitle.textContent=card.dataset.title;});
+});
+modalClose.addEventListener("click",()=>{modal.classList.remove("active");});
+window.addEventListener("click",e=>{if(e.target===modal)modal.classList.remove("active");});
+</script>
+</body>
+</html>
