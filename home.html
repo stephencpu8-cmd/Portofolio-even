@@ -71,6 +71,8 @@ section{opacity:0;transform:translateY(50px);transition:1s;}
 
 /* CONTACT */
 .contact{text-align:center;padding:60px;}
+.contact h2{color:#ff3c00;}
+.contact p{color:white;}
 .contact a{color:#ff3c00;text-decoration:none;}
 .contact-btn{
   display:inline-block;
@@ -137,7 +139,7 @@ footer{text-align:center;padding:30px;opacity:0.6;}
 </section>
 
 <section class="contact" id="contact">
-<h2>Contact</h2>
+<h2>Contact Me</h2>
 <p>Instagram: <a href="#">@i8ouleyy</a></p>
 <a href="mailto:youremail@example.com" class="contact-btn">Hire Me</a>
 </section>
@@ -203,7 +205,8 @@ const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;canvas.height=window.innerHeight;
 let particles=[];
 for(let p=0;p<100;p++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*1.5,dy:(Math.random()-0.5)*1.5});}
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(pa=>{ctx.beginPath();ctx.arc(pa.x,pa.y,pa.r,0,Math.PI*2);ctx.fillStyle="rgba(255,60,0,0.7)";ctx.fill();pa.x+=pa.dx;pa.y+=pa.dy;if(pa.x<0||pa.x>canvas.width)pa.dx*=-1;if(pa.y<0||pa.y>canvas.height)pa.dy*=-1;});requestAnimationFrame(animate);}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(pa=>{ctx.beginPath();ctx.arc(pa.x,pa.y,pa.r,0,Math.PI*2);ctx.fillStyle="rgba(255,60,0,0.7)";ctx.fill();pa.x+=pa.dx;pa.y+=pa.dy;if(pa.x<0||pa.x>canvas.width)pa.dx*=-1;if(pa.y<0||pa.y>canvas.height)pa.dy*=-1;});requestAnimationFrame(animate);}
 animate();
 window.addEventListener("resize",()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 
